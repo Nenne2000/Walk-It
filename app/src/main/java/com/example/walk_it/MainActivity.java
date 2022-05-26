@@ -35,15 +35,19 @@ public class MainActivity extends AppCompatActivity {
         bttSfida2=findViewById(R.id.bttSfida2);
         bttSfida3=findViewById(R.id.bttSfida3);
         bttSfidaPersonalizzata=findViewById(R.id.bttSfidaPersonalizzata);
+
         tvSfida1=findViewById(R.id.tvSfida1);
         tvnumPassiSfida1=findViewById((R.id.tvSfida1NumPassi));
         tvSfida1Time=findViewById(R.id.tvSfida1Time);
+
         tvSfida2=findViewById(R.id.tvSfida2);
         tvnumPassiSfida2=findViewById((R.id.tvSfida2NumPassi));
         tvSfida2Time=findViewById(R.id.tvSfida2Time);
+
         tvSfida3=findViewById(R.id.tvSfida3);
         tvnumPassiSfida3=findViewById((R.id.tvSfida3NumPassi));
         tvSfida3Time=findViewById(R.id.tvSfida3Time);
+
         bttSfida1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -88,6 +92,15 @@ public class MainActivity extends AppCompatActivity {
                 intent.putExtra("NOME_SFIDA",_text);
                 intent.putExtra("PASSI",_numPassi);
                 intent.putExtra("TIME",_time);
+
+                startActivity(intent);
+            }
+        });
+
+        bttSfidaPersonalizzata.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent("customChallenge");//mettere stringa nel file string
 
                 startActivity(intent);
             }
