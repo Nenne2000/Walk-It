@@ -22,6 +22,8 @@ public class CustomChallenge extends AppCompatActivity {
 
         etNumPassi = findViewById(R.id.etCustomPassi);
         etTempoSfida = findViewById(R.id.etCustomTempo);
+
+
         bttConferma = findViewById(R.id.bttConferma);
 
         bttConferma.setOnClickListener(new View.OnClickListener() {
