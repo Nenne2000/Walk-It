@@ -19,10 +19,12 @@ import java.util.ArrayList;
 
 public class Challenge extends AppCompatActivity implements SensorEventListener {
 
-    private long steps=0;
+    private int numpassi;
     private final String TAG = "Challenge";
     private TextView tvNomeSfida=null;
     private TextView tvNumPassi= null;
+    private TextView tvPassiSfida=null;
+    private TextView tvTimeSfida=null;
 
     private TextView countDownText= null;
     private Button startButton = null;
@@ -32,25 +34,18 @@ public class Challenge extends AppCompatActivity implements SensorEventListener 
     private boolean timeIsRunning;
 
     private SensorManager sensorManager = null;
-    private Sensor counterStep = null, detectorStep = null;
+    private Sensor detectorStep = null;
     private SensorEventListener sensorEventListener = null;
-    int stepCount = 0, stepDetect=0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        numpassi=0;
         setContentView(R.layout.activity_challenge);
-
         sensorEventListener = this;
 
         sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
         //se il sensore esiste sul telefonno dove gira l'app allora viene recuperato
-        if (sensorManager.getDefaultSensor(Sensor.TYPE_STEP_COUNTER) != null) {
-            counterStep = sensorManager.getDefaultSensor(Sensor.TYPE_STEP_COUNTER);
-            Log.i(TAG, "Sensore stepCounter inizializzato correttamente");
-        } else {
-            Log.i(TAG, "Sensore stepCounter non presente");
-        }
         if (sensorManager.getDefaultSensor(Sensor.TYPE_STEP_DETECTOR) != null) {
             detectorStep = sensorManager.getDefaultSensor(Sensor.TYPE_STEP_DETECTOR);
             Log.i(TAG, "Sensore StepDetector inizializzato correttamente");
@@ -62,13 +57,20 @@ public class Challenge extends AppCompatActivity implements SensorEventListener 
         countDownText = findViewById(R.id.countDown);
         startButton = findViewById(R.id.start);
 
+        tvPassiSfida=findViewById(R.id.tvPassiSfida);
+        tvTimeSfida=findViewById(R.id.tvTimeSfida);
         tvNomeSfida=findViewById(R.id.tvNomeSfida);
         tvNumPassi=findViewById(R.id.tvNumPassi);
 
 
         Intent _intent=getIntent();
         String _nomeSfida=_intent.getStringExtra("NOME_SFIDA");
+        String _passi=_intent.getStringExtra("PASSI");
+        String _time=_intent.getStringExtra("TIME");
         tvNomeSfida.setText(_nomeSfida);
+        tvTimeSfida.setText(_time + " Secondi");
+        tvPassiSfida.setText(_passi + " Passi");
+
 
         startButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -128,9 +130,9 @@ public class Challenge extends AppCompatActivity implements SensorEventListener 
     @Override
     public void onSensorChanged(SensorEvent sensorEvent) {
         Log.i(TAG, "OnSensorChanged");
-        if (sensorEvent.sensor == counterStep) {
-            stepCount = (int) sensorEvent.values[0];
-            tvNumPassi.setText(String.valueOf(stepCount));
+        if (sensorEvent.sensor == detectorStep) {
+            numpassi++;
+            tvNumPassi.setText(String.valueOf(numpassi));
         }
     }
 
@@ -142,10 +144,6 @@ public class Challenge extends AppCompatActivity implements SensorEventListener 
     @Override
     protected void onResume() {
         super.onResume();
-
-        if (sensorManager.getDefaultSensor(Sensor.TYPE_STEP_COUNTER) != null) {
-            sensorManager.registerListener(this, counterStep, SensorManager.SENSOR_DELAY_FASTEST);
-        }
         if(sensorManager.getDefaultSensor(Sensor.TYPE_STEP_DETECTOR)!=null)
             sensorManager.registerListener(this,detectorStep,SensorManager.SENSOR_DELAY_FASTEST);
     }
@@ -153,9 +151,6 @@ public class Challenge extends AppCompatActivity implements SensorEventListener 
     @Override
     protected void onPause() {
         super.onPause();
-        if (sensorManager.getDefaultSensor(Sensor.TYPE_STEP_COUNTER) != null) {
-            sensorManager.unregisterListener(this,counterStep);
-        }
         if (sensorManager.getDefaultSensor(Sensor.TYPE_STEP_DETECTOR) != null) {
             sensorManager.unregisterListener(this,detectorStep);
         }

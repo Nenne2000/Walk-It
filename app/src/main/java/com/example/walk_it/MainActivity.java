@@ -23,7 +23,7 @@ public class MainActivity extends AppCompatActivity {
     private int STEP_COUNTER_PERMISSION = 1;
 
     private Button bttSfida1=null,bttSfida2=null,bttSfida3=null,bttSfidaPersonalizzata=null;
-    private TextView tvSfida1=null, tvSfida2=null, tvSfida3=null;
+    private TextView tvSfida1=null, tvSfida2=null, tvSfida3=null, tvnumPassiSfida1=null, tvSfida1Time=null , tvnumPassiSfida2=null, tvSfida2Time=null, tvnumPassiSfida3=null, tvSfida3Time=null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,16 +36,25 @@ public class MainActivity extends AppCompatActivity {
         bttSfida3=findViewById(R.id.bttSfida3);
         bttSfidaPersonalizzata=findViewById(R.id.bttSfidaPersonalizzata);
         tvSfida1=findViewById(R.id.tvSfida1);
+        tvnumPassiSfida1=findViewById((R.id.tvSfida1NumPassi));
+        tvSfida1Time=findViewById(R.id.tvSfida1Time);
         tvSfida2=findViewById(R.id.tvSfida2);
+        tvnumPassiSfida2=findViewById((R.id.tvSfida2NumPassi));
+        tvSfida2Time=findViewById(R.id.tvSfida2Time);
         tvSfida3=findViewById(R.id.tvSfida3);
+        tvnumPassiSfida3=findViewById((R.id.tvSfida3NumPassi));
+        tvSfida3Time=findViewById(R.id.tvSfida3Time);
         bttSfida1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 String _text=tvSfida1.getText().toString();
-
+                String _numPassi=tvnumPassiSfida1.getText().toString();
+                String _time=tvSfida1Time.getText().toString();
                 Intent intent=new Intent("sfida");//mettere stringa nel file strings
                 //al posto di sfida 1 mettere path del file da aprire
                 intent.putExtra("NOME_SFIDA",_text);
+                intent.putExtra("PASSI",_numPassi);
+                intent.putExtra("TIME",_time);
                 startActivity(intent);
             }
         });
@@ -54,10 +63,15 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 String _text=tvSfida2.getText().toString();
+                String _numPassi=tvnumPassiSfida2.getText().toString();
+                String _time=tvSfida2Time.getText().toString();
 
                 Intent intent=new Intent("sfida");//mettere stringa nel file strings
                 //al posto di sfida 1 mettere path del file da aprire
                 intent.putExtra("NOME_SFIDA",_text);
+                intent.putExtra("PASSI",_numPassi);
+                intent.putExtra("TIME",_time);
+
                 startActivity(intent);
             }
         });
@@ -66,10 +80,15 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 String _text=tvSfida3.getText().toString();
+                String _numPassi=tvnumPassiSfida3.getText().toString();
+                String _time=tvSfida3Time.getText().toString();
 
                 Intent intent=new Intent("sfida");//mettere stringa nel file strings
                 //al posto di sfida 1 mettere path del file da aprire
                 intent.putExtra("NOME_SFIDA",_text);
+                intent.putExtra("PASSI",_numPassi);
+                intent.putExtra("TIME",_time);
+
                 startActivity(intent);
             }
         });

@@ -22,6 +22,20 @@
         android:textSize="15dp"/>
 
     <TextView
+        android:id="@+id/tvPassiSfida"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="passi totali sfida"
+        android:textSize="15dp"/>
+
+    <TextView
+        android:id="@+id/tvTimeSfida"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="time totale sfida"
+        android:textSize="15dp"/>
+
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="numero passi:"
@@ -33,6 +47,7 @@
         android:layout_height="wrap_content"
         android:text="0"
         android:textSize="20dp" />
+
 
     <TextView
         android:layout_width="wrap_content"
