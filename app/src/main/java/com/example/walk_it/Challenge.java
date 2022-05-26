@@ -30,7 +30,7 @@ public class Challenge extends AppCompatActivity implements SensorEventListener 
     private TextView tvTimeSfida=null;
 
     private TextView countDownText= null;
-    private Button startButton = null;
+    private Button startButton = null, terminateButton=null;
 
     private CountDownTimer countDownTimer;
     private long timeLeftInMilliseconds = 600000; //10 min
@@ -59,6 +59,7 @@ public class Challenge extends AppCompatActivity implements SensorEventListener 
         //timer
         countDownText = findViewById(R.id.countDown);
         startButton = findViewById(R.id.start);
+        terminateButton=findViewById(R.id.bttTermina);
 
         tvPassiSfida=findViewById(R.id.tvPassiSfida);
         tvTimeSfida=findViewById(R.id.tvTimeSfida);
@@ -85,6 +86,17 @@ public class Challenge extends AppCompatActivity implements SensorEventListener 
 
             }
         });
+
+        terminateButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent("result");//mettere stringa nel file strings
+                //al posto di sfida 1 mettere path del file da aprire
+
+                intent.putExtra("RESULT","YOU NOT DID IT :(");
+                startActivity(intent);
+            }
+        });
     }
 
     private void startStop() {
@@ -105,8 +117,10 @@ public class Challenge extends AppCompatActivity implements SensorEventListener 
 
             @Override
             public void onFinish() {
-                Toast.makeText(Challenge.this, "OH NON TEMPO FINITP",
-                        Toast.LENGTH_SHORT).show();
+                Intent intent=new Intent("result");//mettere stringa nel file strings
+                //al posto di sfida 1 mettere path del file da aprire
+                intent.putExtra("RESULT","YOU NOT DID IT :(");
+                startActivity(intent);
             }
         }.start();
         startButton.setText("PAUSE");
