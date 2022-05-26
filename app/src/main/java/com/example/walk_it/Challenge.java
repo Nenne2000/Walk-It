@@ -41,13 +41,6 @@ public class Challenge extends AppCompatActivity implements SensorEventListener 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_challenge);
 
-        //timer
-        countDownText = findViewById(R.id.countDown);
-        startButton = findViewById(R.id.start);
-
-        tvNomeSfida=findViewById(R.id.tvNomeSfida);
-        tvNumPassi=findViewById(R.id.tvNumPassi);
-
         sensorEventListener = this;
 
         sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
@@ -65,6 +58,14 @@ public class Challenge extends AppCompatActivity implements SensorEventListener 
             Log.i(TAG, "Sensore StepDetector non presente");
         }
 
+        //timer
+        countDownText = findViewById(R.id.countDown);
+        startButton = findViewById(R.id.start);
+
+        tvNomeSfida=findViewById(R.id.tvNomeSfida);
+        tvNumPassi=findViewById(R.id.tvNumPassi);
+
+
         Intent _intent=getIntent();
         String _nomeSfida=_intent.getStringExtra("NOME_SFIDA");
         tvNomeSfida.setText(_nomeSfida);
@@ -79,11 +80,14 @@ public class Challenge extends AppCompatActivity implements SensorEventListener 
     }
 
     private void startStop() {
+
+
         if(timeIsRunning) stopTimer();
         else startTimer();
     }
 
     private void startTimer() {
+        onResume();
         countDownTimer = new CountDownTimer(timeLeftInMilliseconds, 1000) {
             @Override
             public void onTick(long l) {
@@ -101,9 +105,11 @@ public class Challenge extends AppCompatActivity implements SensorEventListener 
     }
 
     private void stopTimer() {
+        onPause();
         countDownTimer.cancel();
         startButton.setText("START");
         timeIsRunning = false;
+
     }
 
     private void updateTimer() {
