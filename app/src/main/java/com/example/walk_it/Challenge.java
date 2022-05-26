@@ -2,6 +2,7 @@ package com.example.walk_it;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
@@ -30,8 +31,6 @@ public class Challenge extends AppCompatActivity implements SensorEventListener 
     private long timeLeftInMilliseconds = 600000; //10 min
     private boolean timeIsRunning;
 
-    private ArrayList<Float[]> accValue = null;
-
     private SensorManager sensorManager = null;
     private Sensor counterStep = null, detectorStep = null;
     private SensorEventListener sensorEventListener = null;
@@ -50,9 +49,8 @@ public class Challenge extends AppCompatActivity implements SensorEventListener 
         tvNumPassi=findViewById(R.id.tvNumPassi);
 
         sensorEventListener = this;
-        accValue = new ArrayList<Float[]>();
 
-        sensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
+        sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
         //se il sensore esiste sul telefonno dove gira l'app allora viene recuperato
         if (sensorManager.getDefaultSensor(Sensor.TYPE_STEP_COUNTER) != null) {
             counterStep = sensorManager.getDefaultSensor(Sensor.TYPE_STEP_COUNTER);
