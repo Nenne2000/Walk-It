@@ -14,12 +14,15 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
 public class Challenge extends AppCompatActivity implements SensorEventListener {
 
     private int numpassi;
+    private int obiettivoPassi;
+    private int timeSec;
     private final String TAG = "Challenge";
     private TextView tvNomeSfida=null;
     private TextView tvNumPassi= null;
@@ -71,6 +74,9 @@ public class Challenge extends AppCompatActivity implements SensorEventListener 
         tvTimeSfida.setText(_time + " Secondi");
         tvPassiSfida.setText(_passi + " Passi");
 
+        obiettivoPassi= Integer.parseInt(_passi);
+        timeSec=Integer.parseInt(_time);
+        startStop();
 
         startButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -90,7 +96,7 @@ public class Challenge extends AppCompatActivity implements SensorEventListener 
 
     private void startTimer() {
         onResume();
-        countDownTimer = new CountDownTimer(timeLeftInMilliseconds, 1000) {
+        countDownTimer = new CountDownTimer(timeSec*1000, 1000) {
             @Override
             public void onTick(long l) {
                 timeLeftInMilliseconds = l;
@@ -99,7 +105,8 @@ public class Challenge extends AppCompatActivity implements SensorEventListener 
 
             @Override
             public void onFinish() {
-
+                Toast.makeText(Challenge.this, "OH NON TEMPO FINITP",
+                        Toast.LENGTH_SHORT).show();
             }
         }.start();
         startButton.setText("PAUSE");
@@ -132,7 +139,15 @@ public class Challenge extends AppCompatActivity implements SensorEventListener 
         Log.i(TAG, "OnSensorChanged");
         if (sensorEvent.sensor == detectorStep) {
             numpassi++;
-            tvNumPassi.setText(String.valueOf(numpassi));
+            tvNumPassi.setText(String.valueOf(numpassi)+"/"+ String.valueOf(obiettivoPassi));
+            if(numpassi >= obiettivoPassi){
+
+                Intent intent=new Intent("result");//mettere stringa nel file strings
+                //al posto di sfida 1 mettere path del file da aprire
+                intent.putExtra("RESULT","YOU DID IT");
+
+                startActivity(intent);
+            }
         }
     }
 

@@ -2,8 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.walk_it">
 
-    <uses-permission android:name="android.permission.ACTIVITY_RECOGNITION"/>
+    <uses-permission android:name="android.permission.ACTIVITY_RECOGNITION" />
     <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -12,11 +13,21 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.WalkIt">
         <activity
-            android:name=".Challenge"
+            android:name=".Result"
             android:exported="false" >
             <intent-filter>
-                <action android:name="sfida"/>
-                <category android:name="android.intent.category.DEFAULT"/>
+                <action android:name="result" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".Challenge"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="sfida" />
+
+                <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
         <activity
