@@ -12,15 +12,6 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.WalkIt">
-        <activity
-            android:name=".CustomChallenge"
-            android:exported="false"
-            >
-            <intent-filter>
-                <action android:name="customChallenge" />
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </activity>
 
         <activity
             android:name=".Result"
