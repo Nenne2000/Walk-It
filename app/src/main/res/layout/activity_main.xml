@@ -33,10 +33,9 @@
         android:id="@+id/tvSfida1NumPassi"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="100"
-        android:textSize="20dp"
         android:layout_marginTop="20dp"
-        />
+        android:text="100"
+        android:textSize="20dp" />
 
     <TextView
         android:id="@+id/tvSfida1Time"
@@ -128,10 +127,9 @@
         android:id="@+id/bttSfidaPersonalizzata"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Personalizza sfida"
-        android:textSize="20dp"
         android:layout_marginTop="25dp"
-        />
+        android:text="Personalizza sfida"
+        android:textSize="20dp" />
 
     <Button
         android:id="@+id/button"

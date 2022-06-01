@@ -13,6 +13,8 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.hardware.Sensor;
+import android.hardware.SensorManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
@@ -27,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
 
     private Button bttSfida1=null,bttSfida2=null,bttSfida3=null,bttSfidaPersonalizzata=null;
     private TextView tvSfida1=null, tvSfida2=null, tvSfida3=null, tvnumPassiSfida1=null, tvSfida1Time=null , tvnumPassiSfida2=null, tvSfida2Time=null, tvnumPassiSfida3=null, tvSfida3Time=null;
+
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
@@ -105,6 +108,7 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
 
         bttSfidaPersonalizzata.setOnClickListener(new View.OnClickListener() {
             @Override
