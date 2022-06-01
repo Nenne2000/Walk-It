@@ -1,16 +1,19 @@
 package com.example.walk_it;
 
-import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import android.Manifest;
+import android.app.ActivityManager;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -25,6 +28,7 @@ public class MainActivity extends AppCompatActivity {
     private Button bttSfida1=null,bttSfida2=null,bttSfida3=null,bttSfidaPersonalizzata=null;
     private TextView tvSfida1=null, tvSfida2=null, tvSfida3=null, tvnumPassiSfida1=null, tvSfida1Time=null , tvnumPassiSfida2=null, tvSfida2Time=null, tvnumPassiSfida3=null, tvSfida3Time=null;
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,6 +52,11 @@ public class MainActivity extends AppCompatActivity {
         tvnumPassiSfida3=findViewById((R.id.tvSfida3NumPassi));
         tvSfida3Time=findViewById(R.id.tvSfida3Time);
 
+        //FOREGROUND SERVICE
+        if(!foregroundServiceRunning()) {
+            Intent serviceIntent = new Intent(this, MyForegroundService.class);
+            startForegroundService(serviceIntent);
+        }
         bttSfida1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -158,5 +167,13 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(this, "Permission DENIED", Toast.LENGTH_SHORT).show();
             }
         }
+    }
+
+    public boolean foregroundServiceRunning(){
+        ActivityManager activityManager = (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
+        for(ActivityManager.RunningServiceInfo service : activityManager.getRunningServices(Integer.MAX_VALUE)){
+            if(MyForegroundService.class.getName().equals(service.service.getClassName())) return true;
+        }
+        return false;
     }
 }
