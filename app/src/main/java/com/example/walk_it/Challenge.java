@@ -33,7 +33,7 @@ public class Challenge extends AppCompatActivity implements SensorEventListener 
     private Button startButton = null, terminateButton=null;
 
     private CountDownTimer countDownTimer;
-    private long timeLeftInMilliseconds = 600000; //10 min
+    private long timeLeftInMilliseconds;
     private boolean timeIsRunning;
 
     private SensorManager sensorManager = null;
@@ -76,7 +76,7 @@ public class Challenge extends AppCompatActivity implements SensorEventListener 
         tvPassiSfida.setText(_passi + " Passi");
 
         obiettivoPassi= Integer.parseInt(_passi);
-        timeSec=Integer.parseInt(_time);
+        timeLeftInMilliseconds=Integer.parseInt(_time) * 1000;
         startStop();
 
         startButton.setOnClickListener(new View.OnClickListener() {
@@ -105,10 +105,10 @@ public class Challenge extends AppCompatActivity implements SensorEventListener 
         if(timeIsRunning) stopTimer();
         else startTimer();
     }
-
+    //timeSec*1000
     private void startTimer() {
         onResume();
-        countDownTimer = new CountDownTimer(timeSec*1000, 1000) {
+        countDownTimer = new CountDownTimer(timeLeftInMilliseconds, 1000) {
             @Override
             public void onTick(long l) {
                 timeLeftInMilliseconds = l;
