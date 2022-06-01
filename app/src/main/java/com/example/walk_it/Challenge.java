@@ -105,7 +105,7 @@ public class Challenge extends AppCompatActivity implements SensorEventListener 
         if(timeIsRunning) stopTimer();
         else startTimer();
     }
-    //timeSec*1000
+
     private void startTimer() {
         onResume();
         countDownTimer = new CountDownTimer(timeLeftInMilliseconds, 1000) {
