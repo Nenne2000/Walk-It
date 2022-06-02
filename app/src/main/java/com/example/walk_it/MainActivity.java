@@ -109,7 +109,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-
+//PICCOLO CAMBIO TEMPORANEO
         bttSfidaPersonalizzata.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
