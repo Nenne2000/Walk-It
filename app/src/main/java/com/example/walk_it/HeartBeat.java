@@ -24,7 +24,6 @@ public class HeartBeat extends AppCompatActivity implements SensorEventListener{
     public TextView testoLabel;
     private static final String TAG = "MyActivity";
 
-    private final int ACTIVITY_REQUEST_CODE = 1;
     private int HEART_SENSOR_PERMISSION = 1;
     private long battiti = 0;
 

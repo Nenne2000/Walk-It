@@ -8,6 +8,16 @@
     android:gravity="center_horizontal"
     tools:context=".MainActivity">
 
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -29,6 +39,15 @@
         android:layout_marginTop="20dp"
         />
 
+            <TextView
+                android:id="@+id/tvSfida1Superata"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textSize="20dp"
+                android:layout_marginTop="5dp"
+                />
+
     <TextView
         android:id="@+id/tvSfida1NumPassi"
         android:layout_width="wrap_content"
@@ -45,7 +64,14 @@
         android:textSize="20dp"
         android:layout_marginTop="20dp"
         />
-
+            <TextView
+                android:id="@+id/tvSfida1Storico"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textSize="20dp"
+                android:layout_marginTop="5dp"
+                />
     <Button
         android:id="@+id/bttSfida1"
         android:layout_width="wrap_content"
@@ -62,7 +88,16 @@
         android:text="Sfida2"
         android:textSize="20dp" />
 
-    <TextView
+            <TextView
+                android:id="@+id/tvSfida2Superata"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textSize="20dp"
+                android:layout_marginTop="5dp"
+                />
+
+            <TextView
         android:id="@+id/tvSfida2NumPassi"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -80,6 +115,14 @@
         />
 
 
+            <TextView
+                android:id="@+id/tvSfida2Storico"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textSize="20dp"
+                android:layout_marginTop="5dp"
+                />
     <Button
         android:id="@+id/bttSfida2"
         android:layout_width="wrap_content"
@@ -97,7 +140,16 @@
         android:layout_marginTop="20dp"
         />
 
-    <TextView
+            <TextView
+                android:id="@+id/tvSfida3Superata"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textSize="20dp"
+                android:layout_marginTop="5dp"
+                />
+
+            <TextView
         android:id="@+id/tvSfida3NumPassi"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -115,6 +167,14 @@
         android:layout_marginTop="20dp"
         />
 
+            <TextView
+                android:id="@+id/tvSfida3Storico"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textSize="20dp"
+                android:layout_marginTop="5dp"
+                />
     <Button
         android:id="@+id/bttSfida3"
         android:layout_width="wrap_content"
@@ -142,6 +202,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
 
-
+        </LinearLayout>
+    </ScrollView>
 
 </LinearLayout>

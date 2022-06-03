@@ -16,13 +16,23 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 
 public class Challenge extends AppCompatActivity implements SensorEventListener {
 
     private int numpassi;
     private int obiettivoPassi;
     private int timeSec;
+    private String _nomeSfida;
     private final String TAG = "Challenge";
     private TextView tvNomeSfida=null;
     private TextView tvNumPassi= null;
@@ -68,7 +78,7 @@ public class Challenge extends AppCompatActivity implements SensorEventListener 
 
 
         Intent _intent=getIntent();
-        String _nomeSfida=_intent.getStringExtra("NOME_SFIDA");
+        _nomeSfida=_intent.getStringExtra("NOME_SFIDA");
         String _passi=_intent.getStringExtra("PASSI");
         String _time=_intent.getStringExtra("TIME");
         tvNomeSfida.setText(_nomeSfida);
@@ -90,6 +100,7 @@ public class Challenge extends AppCompatActivity implements SensorEventListener 
         terminateButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                stopTimer();
                 Intent intent=new Intent("result");//mettere stringa nel file strings
                 //al posto di sfida 1 mettere path del file da aprire
 
@@ -117,6 +128,9 @@ public class Challenge extends AppCompatActivity implements SensorEventListener 
 
             @Override
             public void onFinish() {
+                DateFormat datum = new SimpleDateFormat("MMM dd yyyy, h:mm");
+                String date = datum.format(Calendar.getInstance().getTime());
+                writeFile("Ultimo tentativo (non superata):"+date, _nomeSfida);
                 Intent intent=new Intent("result");//mettere stringa nel file strings
                 //al posto di sfida 1 mettere path del file da aprire
                 intent.putExtra("RESULT","YOU NOT DID IT :(");
@@ -155,7 +169,11 @@ public class Challenge extends AppCompatActivity implements SensorEventListener 
             numpassi++;
             tvNumPassi.setText(String.valueOf(numpassi)+"/"+ String.valueOf(obiettivoPassi));
             if(numpassi >= obiettivoPassi){
-
+                stopTimer();
+                DateFormat datum = new SimpleDateFormat("MMM dd yyyy, h:mm");
+                String date = datum.format(Calendar.getInstance().getTime());
+                writeFile("(Superata)",_nomeSfida+"superata");
+                writeFile("Ultimo tentativo(superata):\n"+ date, _nomeSfida);
                 Intent intent=new Intent("result");//mettere stringa nel file strings
                 //al posto di sfida 1 mettere path del file da aprire
                 intent.putExtra("RESULT","YOU DID IT");
@@ -185,4 +203,42 @@ public class Challenge extends AppCompatActivity implements SensorEventListener 
         }
     }
 
+    public void writeFile(String textToSave, String _nomeSfida){
+
+        try {
+            FileOutputStream fileOutputStream=openFileOutput(_nomeSfida+".txt", MODE_PRIVATE);
+            fileOutputStream.write(textToSave.getBytes());
+            fileOutputStream.close();
+
+            Toast.makeText(getApplicationContext(),"Result save", Toast.LENGTH_SHORT).show();
+        }
+        catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        catch (IOException e){
+            e.printStackTrace();
+        }
+    }
+
+    public void readFile(String _nomeSfida, TextView WriteResult){
+        try {
+            FileInputStream fileInputStream=openFileInput(_nomeSfida+".txt");
+            InputStreamReader inputStreamReader= new InputStreamReader(fileInputStream);
+
+            BufferedReader bufferedReader=new BufferedReader(inputStreamReader);
+            StringBuffer stringBuffer=new StringBuffer();
+
+            String lines;
+            while ((lines=bufferedReader.readLine())!=null){
+                stringBuffer.append(lines+"\n");
+            }
+            WriteResult.setText(stringBuffer.toString());
+        }
+        catch (FileNotFoundException e){
+            e.printStackTrace();
+        }
+        catch (IOException e){
+            e.printStackTrace();
+        }
+    }
 }
