@@ -14,6 +14,16 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.WalkIt">
         <activity
+            android:name=".Storico"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="storico" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+
+        </activity>
+        <activity
             android:name=".CustomChallenge"
             android:exported="false">
             <intent-filter>

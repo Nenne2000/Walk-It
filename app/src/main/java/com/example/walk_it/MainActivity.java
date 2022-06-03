@@ -33,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
     private final int ACTIVITY_REQUEST_CODE = 1;
     private int STEP_COUNTER_PERMISSION = 1;
 
-    private Button bttSfida1=null,bttSfida2=null,bttSfida3=null,bttSfidaPersonalizzata=null;
+    private Button bttSfida1=null,bttSfida2=null,bttSfida3=null,bttSfidaPersonalizzata=null, bttSfida1Storico=null, bttSfida2Storico=null, bttSfida3Storico=null;
     private TextView tvSfida1Superata=null,tvSfida2Superata=null,tvSfida3Superata=null, tvSfida1=null, tvSfida2=null, tvSfida3=null, tvnumPassiSfida1=null, tvSfida1Time=null , tvnumPassiSfida2=null, tvSfida2Time=null, tvnumPassiSfida3=null, tvSfida3Time=null, tvSfida1Storico=null,tvSfida2Storico=null,tvSfida3Storico=null;
 
 
@@ -48,6 +48,9 @@ public class MainActivity extends AppCompatActivity {
         bttSfida1=findViewById(R.id.bttSfida1);
         bttSfida2=findViewById(R.id.bttSfida2);
         bttSfida3=findViewById(R.id.bttSfida3);
+        bttSfida1Storico=findViewById(R.id.bttSfida1Storico);
+        bttSfida2Storico=findViewById(R.id.bttSfida2Storico);
+        bttSfida3Storico=findViewById(R.id.bttSfida3Storico);
         bttSfidaPersonalizzata=findViewById(R.id.bttSfidaPersonalizzata);
 
         tvSfida1=findViewById(R.id.tvSfida1);
@@ -136,7 +139,39 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent=new Intent("customChallenge");//mettere stringa nel file string
+                startActivity(intent);
+            }
+        });
 
+        bttSfida1Storico.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String _text=tvSfida1.getText().toString();
+                Intent intent=new Intent("storico");//mettere stringa nel file strings
+                //al posto di sfida 1 mettere path del file da aprire
+                intent.putExtra("NOME_SFIDA",_text);
+                startActivity(intent);
+            }
+        });
+
+        bttSfida2Storico.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String _text=tvSfida2.getText().toString();
+                Intent intent=new Intent("storico");//mettere stringa nel file strings
+                //al posto di sfida 1 mettere path del file da aprire
+                intent.putExtra("NOME_SFIDA",_text);
+                startActivity(intent);
+            }
+        });
+
+        bttSfida3Storico.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String _text=tvSfida3.getText().toString();
+                Intent intent=new Intent("storico");//mettere stringa nel file strings
+                //al posto di sfida 1 mettere path del file da aprire
+                intent.putExtra("NOME_SFIDA",_text);
                 startActivity(intent);
             }
         });

@@ -130,7 +130,8 @@ public class Challenge extends AppCompatActivity implements SensorEventListener 
             public void onFinish() {
                 DateFormat datum = new SimpleDateFormat("MMM dd yyyy, h:mm");
                 String date = datum.format(Calendar.getInstance().getTime());
-                writeFile("Ultimo tentativo (non superata):"+date, _nomeSfida);
+                writeFile("Ultimo tentativo (non superata):"+date, _nomeSfida,MODE_PRIVATE);
+                writeFile("(non superata): "+date+"\n", _nomeSfida+"storico",MODE_APPEND);
                 Intent intent=new Intent("result");//mettere stringa nel file strings
                 //al posto di sfida 1 mettere path del file da aprire
                 intent.putExtra("RESULT","YOU NOT DID IT :(");
@@ -172,8 +173,10 @@ public class Challenge extends AppCompatActivity implements SensorEventListener 
                 stopTimer();
                 DateFormat datum = new SimpleDateFormat("MMM dd yyyy, h:mm");
                 String date = datum.format(Calendar.getInstance().getTime());
-                writeFile("(Superata)",_nomeSfida+"superata");
-                writeFile("Ultimo tentativo(superata):\n"+ date, _nomeSfida);
+                writeFile("(Superata)",_nomeSfida+"superata",MODE_PRIVATE);
+                writeFile("Ultimo tentativo(superata):\n"+ date, _nomeSfida,MODE_PRIVATE);
+                writeFile("(superata): "+ date+"\n", _nomeSfida+"storico",MODE_APPEND);
+
                 Intent intent=new Intent("result");//mettere stringa nel file strings
                 //al posto di sfida 1 mettere path del file da aprire
                 intent.putExtra("RESULT","YOU DID IT");
@@ -203,10 +206,10 @@ public class Challenge extends AppCompatActivity implements SensorEventListener 
         }
     }
 
-    public void writeFile(String textToSave, String _nomeSfida){
+    public void writeFile(String textToSave, String _nomeSfida, int MODE){
 
         try {
-            FileOutputStream fileOutputStream=openFileOutput(_nomeSfida+".txt", MODE_PRIVATE);
+            FileOutputStream fileOutputStream=openFileOutput(_nomeSfida+".txt", MODE);
             fileOutputStream.write(textToSave.getBytes());
             fileOutputStream.close();
 
