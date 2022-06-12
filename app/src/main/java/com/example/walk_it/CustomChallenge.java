@@ -7,13 +7,17 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
+
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class CustomChallenge extends AppCompatActivity {
     private final String TAG = "CustomChallenge";
     private EditText etNumPassi = null;
     private EditText etTempoSfida = null;
     private Button bttConferma = null;
-
+    private String regex = "\\d+";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,15 +34,19 @@ public class CustomChallenge extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                //Aggiungere controlli sul contenuto di edit Text
-                String _passi = etNumPassi.getText().toString();
-                String _tempo = etTempoSfida.getText().toString();
-
-                Intent intent = new Intent("sfida");
-                intent.putExtra("NOME_SFIDA","Sfida Personalizzata");
-                intent.putExtra("PASSI",_passi);
-                intent.putExtra("TIME",_tempo);
-                startActivity(intent);
+                    String _passi = etNumPassi.getText().toString();
+                    String _tempo = etTempoSfida.getText().toString();
+                if(_passi.matches(regex) && _tempo.matches(regex)) {
+                    Intent intent = new Intent("sfida");
+                    intent.putExtra("NOME_SFIDA", "Sfida Personalizzata");
+                    intent.putExtra("PASSI", _passi);
+                    intent.putExtra("TIME", _tempo);
+                    startActivity(intent);
+                }
+                else{
+                    Toast.makeText(CustomChallenge.this, "Inserisci dati validi!",
+                            Toast.LENGTH_SHORT).show();
+                }
             }
         });
     }

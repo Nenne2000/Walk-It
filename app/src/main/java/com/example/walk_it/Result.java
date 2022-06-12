@@ -77,7 +77,7 @@ public class Result extends AppCompatActivity implements SensorEventListener {
     public void onSensorChanged(SensorEvent sensorEvent) {
         if (sensorEvent.sensor.getType() == Sensor.TYPE_HEART_RATE) {
             battiti = (int)sensorEvent.values[0];
-            String msg = " Value sensor: " + battiti;
+            String msg = "" + battiti;
             tvBattiti.setText(msg);
         }
     }

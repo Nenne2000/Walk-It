@@ -176,8 +176,8 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        Button buttonRequest = findViewById(R.id.button);
-        buttonRequest.setOnClickListener(new View.OnClickListener() {
+        Button buttonRequest1 = findViewById(R.id.requestButton1);
+        buttonRequest1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (ContextCompat.checkSelfPermission(MainActivity.this,
@@ -187,6 +187,13 @@ public class MainActivity extends AppCompatActivity {
                 } else {
                     requestActivityRecognitionPermission();
                 }
+            }
+        });
+
+        Button buttonRequest2 = findViewById(R.id.requestButton2);
+        buttonRequest2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
                 if (ContextCompat.checkSelfPermission(MainActivity.this,
                         Manifest.permission.BODY_SENSORS) == PackageManager.PERMISSION_GRANTED) {
                     Toast.makeText(MainActivity.this, "You have already granted this permission!",

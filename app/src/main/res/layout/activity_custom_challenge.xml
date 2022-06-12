@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity="center_horizontal"
+    android:background="@color/blue"
     tools:context=".CustomChallenge">
 
     <TextView
@@ -14,34 +15,77 @@
         android:text="Walk-It"
         android:textSize="25dp"/>
 
-    <TextView
-        android:layout_width="wrap_content"
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/card4"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/tvInserisciSfida"
-        android:text="Inserisci la tua sfida:"
-        android:textSize="15dp"/>
+        android:layout_margin="8dp">
 
-    <EditText
-        android:layout_width="160dp"
-        android:id="@+id/etCustomPassi"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:text="numero passi" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
-    <EditText
-        android:layout_width="160dp"
-        android:id="@+id/etCustomTempo"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:text="secondi sfida" />
 
-    <Button
-        android:id="@+id/bttConferma"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Conferma"
-        android:textSize="15dp"
-        />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <!-- Title, secondary and supporting text -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:id="@+id/tvInserisciSfida"
+                    android:textAppearance="?attr/textAppearanceHeadline6"
+                    android:text="Inserisci la tua sfida:"
+                    android:textSize="20dp"/>
+
+                <EditText
+                    android:layout_width="160dp"
+                    android:id="@+id/etCustomPassi"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="30dp"
+                    android:text="numero passi" />
+
+                <EditText
+                    android:layout_width="160dp"
+                    android:id="@+id/etCustomTempo"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="30dp"
+                    android:text="secondi sfida" />
+
+
+
+            </LinearLayout>
+
+            <!-- Buttons -->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:orientation="horizontal">
+                <Button
+                    android:id="@+id/bttConferma"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="?attr/borderlessButtonStyle"
+                    android:layout_marginTop="8dp"
+                    android:text="Conferma"
+                    android:textSize="15dp"
+                    />
+                >
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+
+
 
 
 
