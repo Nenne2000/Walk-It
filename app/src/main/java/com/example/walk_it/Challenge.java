@@ -100,7 +100,8 @@ public class Challenge extends AppCompatActivity implements SensorEventListener 
         terminateButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                stopTimer();
+
+                startStop();
                 Intent intent=new Intent("result");//mettere stringa nel file strings
                 //al posto di sfida 1 mettere path del file da aprire
 

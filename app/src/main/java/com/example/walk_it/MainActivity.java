@@ -33,8 +33,8 @@ public class MainActivity extends AppCompatActivity {
     private final int ACTIVITY_REQUEST_CODE = 1;
     private int STEP_COUNTER_PERMISSION = 1;
 
-    private Button bttSfida1=null,bttSfida2=null,bttSfida3=null,bttSfidaPersonalizzata=null, bttSfida1Storico=null, bttSfida2Storico=null, bttSfida3Storico=null;
-    private TextView tvSfida1Superata=null,tvSfida2Superata=null,tvSfida3Superata=null, tvSfida1=null, tvSfida2=null, tvSfida3=null, tvnumPassiSfida1=null, tvSfida1Time=null , tvnumPassiSfida2=null, tvSfida2Time=null, tvnumPassiSfida3=null, tvSfida3Time=null, tvSfida1Storico=null,tvSfida2Storico=null,tvSfida3Storico=null;
+    private Button bttBattito=null, bttSfida1=null,bttSfida2=null,bttSfida3=null,bttSfida4=null, bttSfida5=null,bttSfidaPersonalizzata=null, bttSfida1Storico=null, bttSfida2Storico=null, bttSfida3Storico=null,bttSfida4Storico=null, bttSfida5Storico=null;
+    private TextView tvBattito=null, tvSfida1Superata=null,tvSfida2Superata=null,tvSfida3Superata=null,tvSfida4Superata=null,tvSfida5Superata=null, tvSfida1=null, tvSfida2=null, tvSfida3=null,tvSfida4=null,tvSfida5=null, tvnumPassiSfida1=null, tvSfida1Time=null , tvnumPassiSfida2=null, tvSfida2Time=null, tvnumPassiSfida3=null, tvSfida3Time=null, tvnumPassiSfida4=null, tvSfida4Time=null, tvnumPassiSfida5=null, tvSfida5Time=null, tvSfida1Storico=null,tvSfida2Storico=null,tvSfida3Storico=null,tvSfida4Storico=null,tvSfida5Storico=null;
 
 
 
@@ -45,14 +45,20 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
 
+        bttBattito = findViewById(R.id.bttBattito);
         bttSfida1=findViewById(R.id.bttSfida1);
         bttSfida2=findViewById(R.id.bttSfida2);
         bttSfida3=findViewById(R.id.bttSfida3);
+        bttSfida4=findViewById(R.id.bttSfida4);
+        bttSfida5=findViewById(R.id.bttSfida5);
         bttSfida1Storico=findViewById(R.id.bttSfida1Storico);
         bttSfida2Storico=findViewById(R.id.bttSfida2Storico);
         bttSfida3Storico=findViewById(R.id.bttSfida3Storico);
+        bttSfida4Storico=findViewById(R.id.bttSfida4Storico);
+        bttSfida5Storico=findViewById(R.id.bttSfida5Storico);
         bttSfidaPersonalizzata=findViewById(R.id.bttSfidaPersonalizzata);
 
+        tvBattito = findViewById(R.id.tvBattito);
         tvSfida1=findViewById(R.id.tvSfida1);
         tvnumPassiSfida1=findViewById((R.id.tvSfida1NumPassi));
         tvSfida1Time=findViewById(R.id.tvSfida1Time);
@@ -72,14 +78,31 @@ public class MainActivity extends AppCompatActivity {
         tvSfida3Storico=findViewById(R.id.tvSfida3Storico);
         tvSfida3Superata=findViewById(R.id.tvSfida3Superata);
 
+        tvSfida4=findViewById(R.id.tvSfida4);
+        tvnumPassiSfida4=findViewById((R.id.tvSfida4NumPassi));
+        tvSfida4Time=findViewById(R.id.tvSfida4Time);
+        tvSfida4Storico=findViewById(R.id.tvSfida4Storico);
+        tvSfida4Superata=findViewById(R.id.tvSfida4Superata);
+
+        tvSfida5=findViewById(R.id.tvSfida5);
+        tvnumPassiSfida5=findViewById((R.id.tvSfida5NumPassi));
+        tvSfida5Time=findViewById(R.id.tvSfida5Time);
+        tvSfida5Storico=findViewById(R.id.tvSfida5Storico);
+        tvSfida5Superata=findViewById(R.id.tvSfida5Superata);
+
+
 
 
         readFile(tvSfida1.getText().toString(),tvSfida1Storico);
         readFile(tvSfida2.getText().toString(),tvSfida2Storico);
         readFile(tvSfida3.getText().toString(),tvSfida3Storico);
+        readFile(tvSfida4.getText().toString(),tvSfida4Storico);
+        readFile(tvSfida5.getText().toString(),tvSfida5Storico);
         readFile(tvSfida1.getText().toString()+"superata",tvSfida1Superata);
         readFile(tvSfida2.getText().toString()+"superata",tvSfida2Superata);
         readFile(tvSfida3.getText().toString()+"superata",tvSfida3Superata);
+        readFile(tvSfida4.getText().toString()+"superata",tvSfida4Superata);
+        readFile(tvSfida5.getText().toString()+"superata",tvSfida5Superata);
 
         //FOREGROUND SERVICE
         if(!foregroundServiceRunning()) {
@@ -135,7 +158,49 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        bttSfida4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String _text=tvSfida4.getText().toString();
+                String _numPassi=tvnumPassiSfida4.getText().toString();
+                String _time=tvSfida4Time.getText().toString();
+
+                Intent intent=new Intent("sfida");//mettere stringa nel file strings
+                //al posto di sfida 1 mettere path del file da aprire
+                intent.putExtra("NOME_SFIDA",_text);
+                intent.putExtra("PASSI",_numPassi);
+                intent.putExtra("TIME",_time);
+
+                startActivity(intent);
+            }
+        });
+
+        bttSfida5.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String _text=tvSfida5.getText().toString();
+                String _numPassi=tvnumPassiSfida5.getText().toString();
+                String _time=tvSfida5Time.getText().toString();
+
+                Intent intent=new Intent("sfida");//mettere stringa nel file strings
+                //al posto di sfida 1 mettere path del file da aprire
+                intent.putExtra("NOME_SFIDA",_text);
+                intent.putExtra("PASSI",_numPassi);
+                intent.putExtra("TIME",_time);
+
+                startActivity(intent);
+            }
+        });
+
         bttSfidaPersonalizzata.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent("customChallenge");//mettere stringa nel file string
+                startActivity(intent);
+            }
+        });
+
+        bttBattito.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent=new Intent("customChallenge");//mettere stringa nel file string
@@ -169,6 +234,28 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 String _text=tvSfida3.getText().toString();
+                Intent intent=new Intent("storico");//mettere stringa nel file strings
+                //al posto di sfida 1 mettere path del file da aprire
+                intent.putExtra("NOME_SFIDA",_text);
+                startActivity(intent);
+            }
+        });
+
+        bttSfida4Storico.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String _text=tvSfida4.getText().toString();
+                Intent intent=new Intent("storico");//mettere stringa nel file strings
+                //al posto di sfida 1 mettere path del file da aprire
+                intent.putExtra("NOME_SFIDA",_text);
+                startActivity(intent);
+            }
+        });
+
+        bttSfida5Storico.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String _text=tvSfida5.getText().toString();
                 Intent intent=new Intent("storico");//mettere stringa nel file strings
                 //al posto di sfida 1 mettere path del file da aprire
                 intent.putExtra("NOME_SFIDA",_text);
