@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.walk_it">
+    package="com.example.walk_it" >
 
     <uses-permission android:name="android.permission.ACTIVITY_RECOGNITION" />
     <uses-permission android:name="android.permission.BODY_SENSORS" />
@@ -12,20 +12,29 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.WalkIt">
+        android:theme="@style/Theme.WalkIt" >
+
+        <activity
+            android:name=".Battito"
+            android:exported="false" >
+            <intent-filter>
+                <action android:name="battito" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".Storico"
-            android:exported="false">
+            android:exported="false" >
             <intent-filter>
                 <action android:name="storico" />
 
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
-
         </activity>
         <activity
             android:name=".CustomChallenge"
-            android:exported="false">
+            android:exported="false" >
             <intent-filter>
                 <action android:name="customChallenge" />
 
@@ -34,7 +43,7 @@
         </activity>
         <activity
             android:name=".Result"
-            android:exported="false">
+            android:exported="false" >
             <intent-filter>
                 <action android:name="result" />
 
@@ -43,7 +52,7 @@
         </activity>
         <activity
             android:name=".Challenge"
-            android:exported="false">
+            android:exported="false" >
             <intent-filter>
                 <action android:name="sfida" />
 
@@ -52,7 +61,7 @@
         </activity>
         <activity
             android:name=".MainActivity"
-            android:exported="true">
+            android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

@@ -8,36 +8,42 @@ import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
-public class Result extends AppCompatActivity implements SensorEventListener {
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.EventListener;
 
-    private TextView tvResultSfida= null, tvBattiti=null;
+public class Battito extends AppCompatActivity implements SensorEventListener{
+
+
+    private TextView tvBattiti=null;
     private Button bttReturnHome = null;
     private Sensor battito;
     SensorManager sMgr;
     private long battiti = 0;
+    private String _nomeSfida = "Battito";
+    String msg = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_result);
+        setContentView(R.layout.activity_battito);
 
-        tvResultSfida = findViewById(R.id.tvResultSfida);
         bttReturnHome = findViewById(R.id.bttReturnHome);
         tvBattiti=findViewById(R.id.tvBattiti);
 
-        Intent _intent=getIntent();
-        String _resultSfida=_intent.getStringExtra("RESULT");
 
-        tvResultSfida.setText(_resultSfida);
 
         sMgr = (SensorManager)this.getSystemService(SENSOR_SERVICE);
         battito = sMgr.getDefaultSensor(Sensor.TYPE_HEART_RATE);
-
 
         if (battito == null) {
             String err = "Non possiedi questo sensore ";
@@ -45,7 +51,7 @@ public class Result extends AppCompatActivity implements SensorEventListener {
             myunregister();
         }
         else{
-            sMgr.registerListener(this, battito,SensorManager.SENSOR_DELAY_FASTEST);}
+        sMgr.registerListener(this, battito,SensorManager.SENSOR_DELAY_FASTEST);}
 
         bttReturnHome.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -57,6 +63,8 @@ public class Result extends AppCompatActivity implements SensorEventListener {
                 startActivity(intent);
             }
         });
+
+
 
     }
 
@@ -77,7 +85,8 @@ public class Result extends AppCompatActivity implements SensorEventListener {
     public void onSensorChanged(SensorEvent sensorEvent) {
         if (sensorEvent.sensor.getType() == Sensor.TYPE_HEART_RATE) {
             battiti = (int)sensorEvent.values[0];
-            String msg = "" + battiti;
+            if(battiti > 0) writeFile("Ultima misurazione: " + msg, _nomeSfida,MODE_PRIVATE);
+            msg = "" + battiti;
             tvBattiti.setText(msg);
         }
     }
@@ -86,4 +95,23 @@ public class Result extends AppCompatActivity implements SensorEventListener {
     public void onAccuracyChanged(Sensor sensor, int i) {
 
     }
+
+    public void writeFile(String textToSave, String _nomeSfida, int MODE){
+
+        try {
+            FileOutputStream fileOutputStream=openFileOutput(_nomeSfida+".txt", MODE);
+            fileOutputStream.write(textToSave.getBytes());
+            fileOutputStream.close();
+
+            Toast.makeText(getApplicationContext(),"Result save", Toast.LENGTH_SHORT).show();
+        }
+        catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        catch (IOException e){
+            e.printStackTrace();
+        }
+    }
+
+
 }

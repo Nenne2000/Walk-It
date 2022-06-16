@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
     private int STEP_COUNTER_PERMISSION = 1;
 
     private Button bttBattito=null, bttSfida1=null,bttSfida2=null,bttSfida3=null,bttSfida4=null, bttSfida5=null,bttSfidaPersonalizzata=null, bttSfida1Storico=null, bttSfida2Storico=null, bttSfida3Storico=null,bttSfida4Storico=null, bttSfida5Storico=null;
-    private TextView tvBattito=null, tvSfida1Superata=null,tvSfida2Superata=null,tvSfida3Superata=null,tvSfida4Superata=null,tvSfida5Superata=null, tvSfida1=null, tvSfida2=null, tvSfida3=null,tvSfida4=null,tvSfida5=null, tvnumPassiSfida1=null, tvSfida1Time=null , tvnumPassiSfida2=null, tvSfida2Time=null, tvnumPassiSfida3=null, tvSfida3Time=null, tvnumPassiSfida4=null, tvSfida4Time=null, tvnumPassiSfida5=null, tvSfida5Time=null, tvSfida1Storico=null,tvSfida2Storico=null,tvSfida3Storico=null,tvSfida4Storico=null,tvSfida5Storico=null;
+    private TextView tvBattitoStorico=null, tvBattito=null, tvSfida1Superata=null,tvSfida2Superata=null,tvSfida3Superata=null,tvSfida4Superata=null,tvSfida5Superata=null, tvSfida1=null, tvSfida2=null, tvSfida3=null,tvSfida4=null,tvSfida5=null, tvnumPassiSfida1=null, tvSfida1Time=null , tvnumPassiSfida2=null, tvSfida2Time=null, tvnumPassiSfida3=null, tvSfida3Time=null, tvnumPassiSfida4=null, tvSfida4Time=null, tvnumPassiSfida5=null, tvSfida5Time=null, tvSfida1Storico=null,tvSfida2Storico=null,tvSfida3Storico=null,tvSfida4Storico=null,tvSfida5Storico=null;
 
 
 
@@ -59,11 +59,13 @@ public class MainActivity extends AppCompatActivity {
         bttSfidaPersonalizzata=findViewById(R.id.bttSfidaPersonalizzata);
 
         tvBattito = findViewById(R.id.tvBattito);
+        tvBattitoStorico = findViewById(R.id.tvBattitoStorico);
         tvSfida1=findViewById(R.id.tvSfida1);
         tvnumPassiSfida1=findViewById((R.id.tvSfida1NumPassi));
         tvSfida1Time=findViewById(R.id.tvSfida1Time);
         tvSfida1Storico=findViewById(R.id.tvSfida1Storico);
         tvSfida1Superata=findViewById(R.id.tvSfida1Superata);
+
 
         tvSfida2=findViewById(R.id.tvSfida2);
         tvnumPassiSfida2=findViewById((R.id.tvSfida2NumPassi));
@@ -78,11 +80,13 @@ public class MainActivity extends AppCompatActivity {
         tvSfida3Storico=findViewById(R.id.tvSfida3Storico);
         tvSfida3Superata=findViewById(R.id.tvSfida3Superata);
 
+
         tvSfida4=findViewById(R.id.tvSfida4);
         tvnumPassiSfida4=findViewById((R.id.tvSfida4NumPassi));
         tvSfida4Time=findViewById(R.id.tvSfida4Time);
         tvSfida4Storico=findViewById(R.id.tvSfida4Storico);
         tvSfida4Superata=findViewById(R.id.tvSfida4Superata);
+
 
         tvSfida5=findViewById(R.id.tvSfida5);
         tvnumPassiSfida5=findViewById((R.id.tvSfida5NumPassi));
@@ -93,16 +97,19 @@ public class MainActivity extends AppCompatActivity {
 
 
 
+
         readFile(tvSfida1.getText().toString(),tvSfida1Storico);
         readFile(tvSfida2.getText().toString(),tvSfida2Storico);
         readFile(tvSfida3.getText().toString(),tvSfida3Storico);
         readFile(tvSfida4.getText().toString(),tvSfida4Storico);
         readFile(tvSfida5.getText().toString(),tvSfida5Storico);
+        readFile("Battito",tvBattitoStorico);
         readFile(tvSfida1.getText().toString()+"superata",tvSfida1Superata);
         readFile(tvSfida2.getText().toString()+"superata",tvSfida2Superata);
         readFile(tvSfida3.getText().toString()+"superata",tvSfida3Superata);
         readFile(tvSfida4.getText().toString()+"superata",tvSfida4Superata);
         readFile(tvSfida5.getText().toString()+"superata",tvSfida5Superata);
+
 
         //FOREGROUND SERVICE
         if(!foregroundServiceRunning()) {
@@ -203,7 +210,7 @@ public class MainActivity extends AppCompatActivity {
         bttBattito.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent=new Intent("customChallenge");//mettere stringa nel file string
+                Intent intent=new Intent("battito");//mettere stringa nel file string
                 startActivity(intent);
             }
         });
