@@ -31,42 +31,6 @@ public class MyForegroundService extends Service implements SensorEventListener{
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     public int onStartCommand(Intent intent, int flags, int startId){
-        /*
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                while(true){
-                    Log.e("Service", "Service is running...");
-                    try{
-                        Thread.sleep(2000);
-                    } catch (InterruptedException e){
-                        e.printStackTrace();
-                    }
-                }
-            }
-        }).start();
-*/
-        /*
-        Context context = getApplicationContext();
-        Intent notificationIntent = new Intent(this, ExampleActivity.class);
-        PendingIntent pendingIntent =
-                PendingIntent.getActivity(this, 0, notificationIntent,
-                        PendingIntent.FLAG_IMMUTABLE);
-
-        final String CHANNELID = "WALK_IT FOREGROUND SERVICE";
-        NotificationChannel channel = new NotificationChannel(
-                CHANNELID,
-                CHANNELID,
-                NotificationManager.IMPORTANCE_LOW
-        );
-        Log.i(TAG, "passi: " + stepcount);
-        getSystemService(NotificationManager.class).createNotificationChannel(channel);
-        Notification.Builder notification = new Notification.Builder(this, CHANNELID)
-                .setContentText("Oggi hai gia' fatto " + stepcount + " passi")
-                .setContentTitle("WALK-IT!")
-                .setSmallIcon(R.drawable.ic_launcher_background);
-        startForeground(1001, notification.build());
-        */
 
         sensorEventListener = this;
 
@@ -84,20 +48,7 @@ public class MyForegroundService extends Service implements SensorEventListener{
             sensorManager.registerListener(this, counterStep, SensorManager.SENSOR_DELAY_FASTEST);
             Log.i(TAG, "sensore registrato");
         }
-/*
-        final String CHANNELID = "WALK_IT FOREGROUND SERVICE";
-        NotificationChannel channel = new NotificationChannel(
-                CHANNELID,
-                CHANNELID,
-                NotificationManager.IMPORTANCE_LOW
-        );
 
-        getSystemService(NotificationManager.class).createNotificationChannel(channel);
-        Notification.Builder notification = new Notification.Builder(this, CHANNELID)
-                .setContentText("Oggi hai gia' fatto " + stepcount + " passi")
-                .setContentTitle("WALK-IT!")
-                .setSmallIcon(R.drawable.ic_launcher_background);
-        startForeground(1001, notification.build());*/
         return super.onStartCommand(intent,flags,startId);
 
     }
@@ -124,7 +75,7 @@ public class MyForegroundService extends Service implements SensorEventListener{
 
             getSystemService(NotificationManager.class).createNotificationChannel(channel);
             Notification.Builder notification = new Notification.Builder(this, CHANNELID)
-                    .setContentText("Oggi hai gia' fatto " + stepcount + " passi, il tuo obbiettivo è 1000!")
+                    .setContentText("Oggi hai gia' fatto " + stepcount + " passi, il tuo obbiettivo è 10000!")
                     .setContentTitle("Continua a camminare!")
                     .setSmallIcon(R.drawable.ic_launcher_foreground);
             startForeground(1001, notification.build());

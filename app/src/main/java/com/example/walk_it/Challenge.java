@@ -105,7 +105,7 @@ public class Challenge extends AppCompatActivity implements SensorEventListener 
                 Intent intent=new Intent("result");//mettere stringa nel file strings
                 //al posto di sfida 1 mettere path del file da aprire
 
-                intent.putExtra("RESULT","YOU NOT DID IT :(");
+                intent.putExtra("RESULT","SARA' PER LA PROSSIMA VOLTA!");
                 startActivity(intent);
             }
         });
@@ -135,7 +135,7 @@ public class Challenge extends AppCompatActivity implements SensorEventListener 
                 writeFile("(non superata): "+date+"\n", _nomeSfida+"storico",MODE_APPEND);
                 Intent intent=new Intent("result");//mettere stringa nel file strings
                 //al posto di sfida 1 mettere path del file da aprire
-                intent.putExtra("RESULT","YOU NOT DID IT :(");
+                intent.putExtra("RESULT","PURTROPPO QUESTA VOLTA NON CE L'HAI FATTA");
                 startActivity(intent);
             }
         }.start();
@@ -180,7 +180,7 @@ public class Challenge extends AppCompatActivity implements SensorEventListener 
 
                 Intent intent=new Intent("result");//mettere stringa nel file strings
                 //al posto di sfida 1 mettere path del file da aprire
-                intent.putExtra("RESULT","YOU DID IT");
+                intent.putExtra("RESULT","CE L'HAI FATTA!");
 
                 startActivity(intent);
             }
