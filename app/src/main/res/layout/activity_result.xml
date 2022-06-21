@@ -13,7 +13,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Walk-It"
+        android:text="@string/walk_it"
         android:textSize="25dp"/>
 
     <com.google.android.material.card.MaterialCardView
@@ -46,7 +46,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textAppearance="?attr/textAppearanceBody2"
-                    android:text="Adesso misura il tuo battito:"/>
+                    android:text="@string/misura_battito"/>
 
                 <TextView
                     android:id="@+id/tvBattiti"
@@ -65,7 +65,7 @@
         android:id="@+id/bttReturnHome"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="TORNA ALLA HOME"
+        android:text="@string/home"
         android:layout_marginTop="50dp"/>
 
 

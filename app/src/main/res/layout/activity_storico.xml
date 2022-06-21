@@ -13,6 +13,6 @@
         android:id="@+id/tvStorico"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Storico"/>
+        android:text="@string/storico"/>
 
 </LinearLayout>

@@ -24,13 +24,13 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Walk-It"
+                android:text="@string/walk_it"
                 android:textSize="25dp" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="FACCIAMO UNA CAMMINATA"
+                android:text="@string/walk_it_frase"
                 android:textSize="15dp" />
 
             <com.google.android.material.card.MaterialCardView
@@ -57,7 +57,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="5dp"
-                            android:text="Sfida1"
+                            android:text="@string/sfida1"
                             android:textAppearance="?attr/textAppearanceHeadline6"
                             android:textSize="20dp" />
 
@@ -117,7 +117,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginEnd="8dp"
-                            android:text="Inizia Sfida 1"
+                            android:text="@string/Start_1"
                             android:textSize="15dp" />
 
                         <Button
@@ -126,7 +126,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginEnd="8dp"
-                            android:text="Storico Sfida 1"
+                            android:text="@string/storico_1"
                             android:textSize="15dp" />
 
                     </LinearLayout>
@@ -160,7 +160,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="5dp"
-                            android:text="Sfida2"
+                            android:text="@string/sfida2"
                             android:textAppearance="?attr/textAppearanceHeadline6"
                             android:textSize="20dp" />
 
@@ -219,7 +219,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginEnd="8dp"
-                            android:text="Inizia Sfida 2"
+                            android:text="@string/start_2"
                             android:textSize="15dp" />
 
                         <Button
@@ -228,7 +228,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginEnd="8dp"
-                            android:text="Storico Sfida 2"
+                            android:text="@string/storico_2"
                             android:textSize="15dp" />
 
                     </LinearLayout>
@@ -262,7 +262,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="5dp"
-                            android:text="Sfida3"
+                            android:text="@string/sfida3"
                             android:textAppearance="?attr/textAppearanceHeadline6"
                             android:textSize="20dp" />
 
@@ -321,7 +321,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginEnd="8dp"
-                            android:text="Inizia Sfida 3"
+                            android:text="@string/start_3"
                             android:textSize="15dp" />
 
                         <Button
@@ -330,7 +330,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginEnd="8dp"
-                            android:text="Storico Sfida 3"
+                            android:text="@string/storico_3"
                             android:textSize="15dp" />
 
                     </LinearLayout>
@@ -363,7 +363,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="5dp"
-                            android:text="Sfida4"
+                            android:text="@string/sfida4"
                             android:textAppearance="?attr/textAppearanceHeadline6"
                             android:textSize="20dp" />
 
@@ -422,7 +422,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginEnd="8dp"
-                            android:text="Inizia Sfida 4"
+                            android:text="@string/start_4"
                             android:textSize="15dp" />
 
                         <Button
@@ -431,7 +431,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginEnd="8dp"
-                            android:text="Storico Sfida 4"
+                            android:text="@string/storico_4"
                             android:textSize="15dp" />
 
                     </LinearLayout>
@@ -464,7 +464,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="5dp"
-                            android:text="Sfida5"
+                            android:text="@string/sfida5"
                             android:textAppearance="?attr/textAppearanceHeadline6"
                             android:textSize="20dp" />
 
@@ -523,7 +523,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginEnd="8dp"
-                            android:text="Inizia Sfida 5"
+                            android:text="@string/start_5"
                             android:textSize="15dp" />
 
                         <Button
@@ -532,7 +532,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginEnd="8dp"
-                            android:text="Storico Sfida 5"
+                            android:text="@string/storico_5"
                             android:textSize="15dp" />
 
                     </LinearLayout>
@@ -565,7 +565,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="5dp"
-                            android:text="Sfida personalizzata"
+                            android:text="@string/pers_sfida"
                             android:textAppearance="?attr/textAppearanceHeadline6"
                             android:textSize="20dp" />
 
@@ -574,7 +574,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="5dp"
-                            android:text="Crea una sfida adatta a te!"
+                            android:text="@string/crea_una_sfida_adatta_a_te"
                             android:textAppearance="?attr/textAppearanceBody2"
                             android:textColor="?android:attr/textColorSecondary"
                             android:textSize="20dp" />
@@ -596,7 +596,7 @@
                             android:layout_height="wrap_content"
                             style="?attr/borderlessButtonStyle"
                             android:layout_marginTop="8dp"
-                            android:text="Personalizza sfida"
+                            android:text="@string/personalizza_sfida"
                             android:textSize="15dp" />
 
                     </LinearLayout>
@@ -629,7 +629,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="5dp"
-                            android:text="Misura il tuo battito!"
+                            android:text="@string/misura_battito"
                             android:textAppearance="?attr/textAppearanceHeadline6"
                             android:textSize="20dp" />
 
@@ -638,7 +638,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="5dp"
-                            android:text="Tieni traccia della tua frequenza cardiaca"
+                            android:text="@string/testo_battito"
                             android:textAppearance="?attr/textAppearanceBody2"
                             android:textColor="?android:attr/textColorSecondary"
                             android:textSize="20dp" />
@@ -670,7 +670,7 @@
                             android:layout_height="wrap_content"
                             style="?attr/borderlessButtonStyle"
                             android:layout_marginTop="8dp"
-                            android:text="Misura Battito"
+                            android:text="@string/bottone_battito"
                             android:textSize="15dp" />
 
                     </LinearLayout>
@@ -684,7 +684,7 @@
                 android:id="@+id/requestButton1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Request Activity Permission"
+                android:text="@string/permesso_activity"
                 style="?attr/materialButtonOutlinedStyle"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"
@@ -695,7 +695,7 @@
                 android:id="@+id/requestButton2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Request Heart beat Permission"
+                android:text="@string/permesso_battito"
                 style="?attr/materialButtonOutlinedStyle"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"

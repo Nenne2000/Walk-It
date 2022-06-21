@@ -12,7 +12,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Walk-It"
+        android:text="@string/walk_it"
         android:textSize="25dp"/>
 
     <com.google.android.material.card.MaterialCardView
@@ -40,22 +40,34 @@
                     android:layout_marginTop="5dp"
                     android:id="@+id/tvInserisciSfida"
                     android:textAppearance="?attr/textAppearanceHeadline6"
-                    android:text="Inserisci la tua sfida:"
+                    android:text="@string/inserisci_sfida"
                     android:textSize="20dp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:text="@string/numero_passi"
+                    android:textSize="20dp" />
 
                 <EditText
                     android:layout_width="160dp"
                     android:id="@+id/etCustomPassi"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="30dp"
-                    android:text="numero passi" />
+                    android:layout_marginTop="5dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:text="@string/secondi_sfida"
+                    android:textSize="20dp" />
 
                 <EditText
                     android:layout_width="160dp"
                     android:id="@+id/etCustomTempo"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="30dp"
-                    android:text="secondi sfida" />
+                    android:layout_marginTop="5dp" />
 
 
 
@@ -73,7 +85,7 @@
                     android:layout_height="wrap_content"
                     style="?attr/borderlessButtonStyle"
                     android:layout_marginTop="8dp"
-                    android:text="Conferma"
+                    android:text="@string/conferma"
                     android:textSize="15dp"
                     />
                 >
