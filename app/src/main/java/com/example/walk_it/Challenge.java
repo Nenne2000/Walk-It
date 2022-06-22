@@ -56,7 +56,6 @@ public class Challenge extends AppCompatActivity implements SensorEventListener 
     private CountDownTimer countDownTimer;
     private long timeLeftInMilliseconds;
     private boolean timeIsRunning;
-    private boolean timerover = false;
 
     private SensorManager sensorManager = null;
     private Sensor detectorStep = null;
@@ -198,7 +197,7 @@ public class Challenge extends AppCompatActivity implements SensorEventListener 
         if (sensorEvent.sensor == detectorStep) {
             numpassi = (int) sensorEvent.values[0] - stepcount;
             tvNumPassi.setText(String.valueOf(numpassi)+"/"+ String.valueOf(obiettivoPassi));
-            if(numpassi >= obiettivoPassi && !this.timerover){
+            if(numpassi >= obiettivoPassi){
                 stopTimer();
                 datum = new SimpleDateFormat("MMM dd yyyy, h:mm");
                 date = datum.format(Calendar.getInstance().getTime());
@@ -262,7 +261,7 @@ public class Challenge extends AppCompatActivity implements SensorEventListener 
             fileOutputStream.write(textToSave.getBytes());
             fileOutputStream.close();
 
-            Toast.makeText(getApplicationContext(),"Result save", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(getApplicationContext(),"Result save", Toast.LENGTH_SHORT).show();
         }
         catch (FileNotFoundException e) {
             e.printStackTrace();
