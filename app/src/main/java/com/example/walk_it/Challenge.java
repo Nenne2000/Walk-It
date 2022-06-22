@@ -29,6 +29,7 @@ import java.util.Calendar;
 
 public class Challenge extends AppCompatActivity implements SensorEventListener {
 
+    private int stepcount;
     private int numpassi;
     private int obiettivoPassi;
     private int timeSec;
@@ -58,12 +59,25 @@ public class Challenge extends AppCompatActivity implements SensorEventListener 
         sensorEventListener = this;
 
         sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
+        /*
         //se il sensore esiste sul telefonno dove gira l'app allora viene recuperato
         if (sensorManager.getDefaultSensor(Sensor.TYPE_STEP_DETECTOR) != null) {
             detectorStep = sensorManager.getDefaultSensor(Sensor.TYPE_STEP_DETECTOR);
             Log.i(TAG, "Sensore StepDetector inizializzato correttamente");
         } else {
             Log.i(TAG, "Sensore StepDetector non presente");
+        }
+*/
+        if (sensorManager.getDefaultSensor(Sensor.TYPE_STEP_COUNTER) != null) {
+            detectorStep = sensorManager.getDefaultSensor(Sensor.TYPE_STEP_COUNTER);
+            Log.i(TAG, "Sensore StepCounter inizializzato correttamente");
+        } else {
+            Log.i(TAG, "Sensore StepCounter non presente");
+        }
+
+        if (sensorManager.getDefaultSensor(Sensor.TYPE_STEP_COUNTER) != null) {
+            sensorManager.registerListener(this, detectorStep, SensorManager.SENSOR_DELAY_FASTEST);
+            Log.i(TAG, "sensore registrato");
         }
 
         //timer
@@ -129,14 +143,16 @@ public class Challenge extends AppCompatActivity implements SensorEventListener 
 
             @Override
             public void onFinish() {
-                DateFormat datum = new SimpleDateFormat("MMM dd yyyy, h:mm");
-                String date = datum.format(Calendar.getInstance().getTime());
-                writeFile("Ultimo tentativo (non superata):"+date, _nomeSfida,MODE_PRIVATE);
-                writeFile("(non superata): "+date+"\n", _nomeSfida+"storico",MODE_APPEND);
-                Intent intent=new Intent("result");//mettere stringa nel file strings
-                //al posto di sfida 1 mettere path del file da aprire
-                intent.putExtra("RESULT","PURTROPPO QUESTA VOLTA NON CE L'HAI FATTA");
-                startActivity(intent);
+                if(numpassi < obiettivoPassi) {
+                    DateFormat datum = new SimpleDateFormat("MMM dd yyyy, h:mm");
+                    String date = datum.format(Calendar.getInstance().getTime());
+                    writeFile("Ultimo tentativo (non superata):" + date, _nomeSfida, MODE_PRIVATE);
+                    writeFile("(non superata): " + date + "\n", _nomeSfida + "storico", MODE_APPEND);
+                    Intent intent = new Intent("result");//mettere stringa nel file strings
+                    //al posto di sfida 1 mettere path del file da aprire
+                    intent.putExtra("RESULT", "PURTROPPO QUESTA VOLTA NON CE L'HAI FATTA");
+                    startActivity(intent);
+                }
             }
         }.start();
         startButton.setText("PAUSE");
@@ -167,8 +183,9 @@ public class Challenge extends AppCompatActivity implements SensorEventListener 
     @Override
     public void onSensorChanged(SensorEvent sensorEvent) {
         Log.i(TAG, "OnSensorChanged");
+        if(stepcount == 0) stepcount = (int) sensorEvent.values[0];
         if (sensorEvent.sensor == detectorStep) {
-            numpassi++;
+            numpassi = (int) sensorEvent.values[0] - stepcount;
             tvNumPassi.setText(String.valueOf(numpassi)+"/"+ String.valueOf(obiettivoPassi));
             if(numpassi >= obiettivoPassi){
                 stopTimer();
@@ -223,7 +240,7 @@ public class Challenge extends AppCompatActivity implements SensorEventListener 
             e.printStackTrace();
         }
     }
-
+/*
     public void readFile(String _nomeSfida, TextView WriteResult){
         try {
             FileInputStream fileInputStream=openFileInput(_nomeSfida+".txt");
@@ -245,4 +262,6 @@ public class Challenge extends AppCompatActivity implements SensorEventListener 
             e.printStackTrace();
         }
     }
+
+ */
 }
