@@ -1,13 +1,20 @@
 package com.example.walk_it;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NotificationManagerCompat;
 
+import android.app.Notification;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.content.AsyncQueryHandler;
 import android.content.Context;
 import android.content.Intent;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.util.Log;
@@ -29,6 +36,9 @@ import java.util.Calendar;
 
 public class Challenge extends AppCompatActivity implements SensorEventListener {
 
+    DateFormat datum;
+    String date;
+
     private int stepcount;
     private int numpassi;
     private int obiettivoPassi;
@@ -46,6 +56,7 @@ public class Challenge extends AppCompatActivity implements SensorEventListener 
     private CountDownTimer countDownTimer;
     private long timeLeftInMilliseconds;
     private boolean timeIsRunning;
+    private boolean timerover = false;
 
     private SensorManager sensorManager = null;
     private Sensor detectorStep = null;
@@ -135,6 +146,7 @@ public class Challenge extends AppCompatActivity implements SensorEventListener 
     private void startTimer() {
         onResume();
         countDownTimer = new CountDownTimer(timeLeftInMilliseconds, 1000) {
+
             @Override
             public void onTick(long l) {
                 timeLeftInMilliseconds = l;
@@ -143,16 +155,14 @@ public class Challenge extends AppCompatActivity implements SensorEventListener 
 
             @Override
             public void onFinish() {
-                if(numpassi < obiettivoPassi) {
-                    DateFormat datum = new SimpleDateFormat("MMM dd yyyy, h:mm");
-                    String date = datum.format(Calendar.getInstance().getTime());
-                    writeFile("Ultimo tentativo (non superata):" + date, _nomeSfida, MODE_PRIVATE);
-                    writeFile("(non superata): " + date + "\n", _nomeSfida + "storico", MODE_APPEND);
-                    Intent intent = new Intent("result");//mettere stringa nel file strings
-                    //al posto di sfida 1 mettere path del file da aprire
-                    intent.putExtra("RESULT", "PURTROPPO QUESTA VOLTA NON CE L'HAI FATTA");
-                    startActivity(intent);
-                }
+                datum = new SimpleDateFormat("MMM dd yyyy, h:mm");
+                date = datum.format(Calendar.getInstance().getTime());
+                writeFile("Ultimo tentativo (non superata):" + date, _nomeSfida, MODE_PRIVATE);
+                writeFile("(non superata): " + date + "\n", _nomeSfida + "storico", MODE_APPEND);
+                Intent intent = new Intent("result");//mettere stringa nel file strings
+                //al posto di sfida 1 mettere path del file da aprire
+                intent.putExtra("RESULT", "PURTROPPO QUESTA VOLTA NON CE L'HAI FATTA");
+                startActivity(intent);
             }
         }.start();
         startButton.setText("PAUSE");
@@ -180,6 +190,7 @@ public class Challenge extends AppCompatActivity implements SensorEventListener 
         countDownText.setText(timeLeft);
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     public void onSensorChanged(SensorEvent sensorEvent) {
         Log.i(TAG, "OnSensorChanged");
@@ -187,19 +198,39 @@ public class Challenge extends AppCompatActivity implements SensorEventListener 
         if (sensorEvent.sensor == detectorStep) {
             numpassi = (int) sensorEvent.values[0] - stepcount;
             tvNumPassi.setText(String.valueOf(numpassi)+"/"+ String.valueOf(obiettivoPassi));
-            if(numpassi >= obiettivoPassi){
+            if(numpassi >= obiettivoPassi && !this.timerover){
                 stopTimer();
-                DateFormat datum = new SimpleDateFormat("MMM dd yyyy, h:mm");
-                String date = datum.format(Calendar.getInstance().getTime());
+                datum = new SimpleDateFormat("MMM dd yyyy, h:mm");
+                date = datum.format(Calendar.getInstance().getTime());
                 writeFile("(Superata)",_nomeSfida+"superata",MODE_PRIVATE);
                 writeFile("Ultimo tentativo(superata):\n"+ date, _nomeSfida,MODE_PRIVATE);
                 writeFile("(superata): "+ date+"\n", _nomeSfida+"storico",MODE_APPEND);
 
-                Intent intent=new Intent("result");//mettere stringa nel file strings
-                //al posto di sfida 1 mettere path del file da aprire
-                intent.putExtra("RESULT","CE L'HAI FATTA!");
+                final String CHANNELID = "WALK_IT SERVICE";
+                NotificationChannel channel = null;
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                    channel = new NotificationChannel(
+                            CHANNELID,
+                            CHANNELID,
+                            NotificationManager.IMPORTANCE_HIGH
+                    );
 
-                startActivity(intent);
+                    getSystemService(NotificationManager.class).createNotificationChannel(channel);
+                    Notification.Builder notification = new Notification.Builder(this, CHANNELID)
+                            .setContentText("Riposati o prova un'altra sfida")
+                            .setContentTitle("Successo!")
+                            .setSmallIcon(R.drawable.ic_launcher_foreground);
+
+                    NotificationManagerCompat notificationManager = NotificationManagerCompat.from(this);
+
+                    notificationManager.notify(1 , notification.build());
+
+                    Intent intent=new Intent("result");//mettere stringa nel file strings
+                    //al posto di sfida 1 mettere path del file da aprire
+                    intent.putExtra("RESULT","CE L'HAI FATTA!");
+
+                    startActivity(intent);
+                }
             }
         }
     }
@@ -240,28 +271,5 @@ public class Challenge extends AppCompatActivity implements SensorEventListener 
             e.printStackTrace();
         }
     }
-/*
-    public void readFile(String _nomeSfida, TextView WriteResult){
-        try {
-            FileInputStream fileInputStream=openFileInput(_nomeSfida+".txt");
-            InputStreamReader inputStreamReader= new InputStreamReader(fileInputStream);
 
-            BufferedReader bufferedReader=new BufferedReader(inputStreamReader);
-            StringBuffer stringBuffer=new StringBuffer();
-
-            String lines;
-            while ((lines=bufferedReader.readLine())!=null){
-                stringBuffer.append(lines+"\n");
-            }
-            WriteResult.setText(stringBuffer.toString());
-        }
-        catch (FileNotFoundException e){
-            e.printStackTrace();
-        }
-        catch (IOException e){
-            e.printStackTrace();
-        }
-    }
-
- */
 }
